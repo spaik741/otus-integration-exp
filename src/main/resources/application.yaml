@@ -1,1 +1,5 @@
-
+#spring:
+#  application:
+#    admin:
+#      enabled: true
+#      jmx-name: otus.integration.exp:type=Admin,name=OtusIntegrationExpApplication

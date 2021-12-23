@@ -5,10 +5,10 @@ import lombok.Getter;
 
 @AllArgsConstructor
 public enum Kind {
-    SHAMPOO(1, ""),
-    RINSING(2, ""),
-    WAX(3, ""),
-    POLISH(4, "");
+    SHAMPOO(1, "foam wash"),
+    RINSING(2, "rinsing"),
+    WAX(3, "waxing"),
+    POLISH(4, "polished");
 
     @Getter
     private int number;
