@@ -4,5 +4,5 @@ import otus.integration.exp.entity.Car;
 import otus.integration.exp.entity.OrderWash;
 
 public interface CarWash {
-    Car washing (OrderWash order) throws Exception;
+    OrderWash washing (OrderWash order) throws Exception;
 }

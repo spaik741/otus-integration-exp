@@ -18,7 +18,7 @@ public class CarWashService implements CarWash {
     }
 
 
-    public Car washing (OrderWash order) throws Exception {
+    public OrderWash washing (OrderWash order) throws Exception {
         List<Kind> kindList = order.getKinds();
 //        kindList.sort(Comparator.comparingInt(Kind::getNumber));
         for (Kind kind : kindList) {
@@ -26,6 +26,7 @@ public class CarWashService implements CarWash {
                     " " + order.getCar().getModel() +" now " + kind.getDescription());
             Thread.sleep(1000);
         }
-        return order.getCar();
+        order.setCompleted(true);
+        return order;
     }
 }

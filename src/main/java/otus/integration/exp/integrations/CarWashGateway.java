@@ -8,5 +8,5 @@ import otus.integration.exp.entity.OrderWash;
 @MessagingGateway
 public interface CarWashGateway {
     @Gateway(requestChannel = "carsFlow.input")
-    Car process(OrderWash orderWash);
+    OrderWash process(OrderWash orderWash);
 }

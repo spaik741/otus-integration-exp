@@ -1,6 +1,7 @@
 package otus.integration.exp.integrations;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +10,7 @@ import org.springframework.integration.channel.QueueChannel;
 import org.springframework.integration.config.EnableIntegration;
 import org.springframework.integration.dsl.*;
 import org.springframework.integration.scheduling.PollerMetadata;
+import otus.integration.exp.service.CarWash;
 
 @IntegrationComponentScan
 @ComponentScan
@@ -16,6 +18,8 @@ import org.springframework.integration.scheduling.PollerMetadata;
 @EnableIntegration
 public class IntegrationConfig {
 
+    @Autowired
+    private CarWash carWash;
 
     @Bean(name = PollerMetadata.DEFAULT_POLLER)
     public PollerSpec poller() {
@@ -31,9 +35,14 @@ public class IntegrationConfig {
     public IntegrationFlow carsFlow() {
         return flow -> flow
                 .split()
-                .handle("carWashService", "washing")
+                .handle(carWash, "washing")
                 .aggregate();
-
+//        return IntegrationFlows
+//                .from("carsChannel")
+//                .split()
+//                .handle(carWash, "washing")
+//                .aggregate()
+//                .get();
     }
 
 }

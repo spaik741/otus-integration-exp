@@ -11,4 +11,5 @@ import java.util.List;
 public class OrderWash {
     private Car car;
     private List<Kind> kinds;
+    private boolean completed;
 }
