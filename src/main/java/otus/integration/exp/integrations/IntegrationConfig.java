@@ -12,6 +12,8 @@ import org.springframework.integration.dsl.*;
 import org.springframework.integration.scheduling.PollerMetadata;
 import otus.integration.exp.service.CarWash;
 
+import java.util.concurrent.Executors;
+
 @IntegrationComponentScan
 @ComponentScan
 @Configuration
@@ -27,22 +29,11 @@ public class IntegrationConfig {
     }
 
     @Bean
-    public QueueChannel carsChannel() {
-        return MessageChannels.queue(5).get();
-    }
-
-    @Bean
     public IntegrationFlow carsFlow() {
-        return flow -> flow
+        return flow -> flow.channel(c -> c.executor(Executors.newCachedThreadPool()))
                 .split()
                 .handle(carWash, "washing")
                 .aggregate();
-//        return IntegrationFlows
-//                .from("carsChannel")
-//                .split()
-//                .handle(carWash, "washing")
-//                .aggregate()
-//                .get();
     }
 
 }
